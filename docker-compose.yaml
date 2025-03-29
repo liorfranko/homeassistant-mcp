@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  homeassistant-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: homeassistant-mcp
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      - ha-network
+    volumes:
+      - ./config:/app/config
+    env_file:
+      - .env
+
+networks:
+  ha-network:
+    driver: bridge 
